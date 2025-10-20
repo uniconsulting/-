@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Коммерческое предложение — ЮНИ.ai</title>
+<meta name="description" content="Коммерческое предложение на разработку сайта‑каталога с корзиной для производителя лакокрасочной продукции. ЮНИ.ai — ИИ в каждый бизнес." />
+<style>
+  :root{
+    --bg1:#f7f9fc; /* светлая основа */
+    --bg2:#eef3ff; /* лёгкий голубой */
+    --bg3:#fff7f5; /* тёплый отблеск */
+    --ink:#0f172a; /* текст */
+    --muted:#475569; /* подписи */
+    --brand:#0ea5e9; /* акцент */
+    --brand-2:#22d3ee; /* акцент вторичный */
+    --glass: rgba(255,255,255,0.55);
+    --glass-strong: rgba(255,255,255,0.7);
+    --stroke: rgba(255,255,255,0.6);
+    --shadow: 0 10px 30px rgba(20,20,60,0.08), 0 2px 10px rgba(20,20,60,0.05);
+    --radius: 20px;
+    /* ярче, но с сохранением прозрачности */
+    --glow1: rgba(0, 231, 255, .9);
+    --glow2: rgba(42, 245, 209, .88);
+    --glow3: rgba(34, 197, 94, .88);
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  html{scroll-behavior:smooth} 
+  body{
+    margin:0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
+    color:var(--ink);
+    background: radial-gradient(1200px 800px at 15% 10%, var(--bg2), transparent 60%),
+                radial-gradient(1000px 600px at 85% 0%, var(--bg3), transparent 60%),
+                linear-gradient(180deg, #ffffff 0%, var(--bg1) 100%);
+    background-attachment: fixed;
+  }
+  /* мягкая анимация фона */
+  body::before{
+    content:"";
+    position:fixed; inset:-10vmax; z-index:-1;
+    background:
+      radial-gradient(720px 480px at 82% 18%, rgba(0,231,255,.18), transparent 60%),
+      radial-gradient(820px 560px at 18% 66%, rgba(255,176,124,.16), transparent 60%),
+      radial-gradient(900px 620px at 8% 10%, rgba(99,102,241,.12), transparent 60%);
+    filter: blur(30px);
+    animation: float 18s ease-in-out infinite alternate;
+  }
+  @keyframes float{from{transform:translate3d(-10px,0,0)}to{transform:translate3d(10px,-10px,0)}}
+
+  .wrapper{max-width:1160px; margin:0 auto; padding: 48px 20px 96px;}
+  .brandbar{display:flex; align-items:center; gap:14px; margin-bottom:22px;}
+  .logo{
+    width:40px; height:40px; border-radius:14px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(255,255,255,0.6));
+    border:1px solid var(--stroke);
+    box-shadow: var(--shadow);
+    display:grid; place-items:center; backdrop-filter: blur(8px);
+  }
+  .logo img{width:100%;height:100%;object-fit:contain;border-radius:inherit}
+  .brandbar .name{font-weight:700; letter-spacing:0.2px}
+  .brandbar .tag{color:var(--muted); font-size:14px}
+
+  .hero{position:relative; overflow:hidden; border-radius: clamp(18px, 2vw, 26px); border:2px solid transparent; background:
+    linear-gradient(120deg, rgba(255,255,255,0.75), rgba(255,255,255,0.55)) padding-box,
+    conic-gradient(from var(--ang), var(--glow1) 0%, var(--glow2) 35%, var(--glow3) 70%, var(--glow1) 100%) border-box;
+  box-shadow: var(--shadow); padding: clamp(24px, 5vw, 48px); backdrop-filter: blur(10px); animation: spinAng 8s linear infinite}
+  .hero h1{margin:0 0 10px; font-size: clamp(28px, 3.4vw, 44px); line-height:1.12}
+  .hero p{margin:0; color:var(--muted); font-size: clamp(16px,1.4vw,18px)}
+  .chips{display:flex; flex-wrap:wrap; gap:10px; margin-top:16px}
+  .chip{position:relative; overflow:visible; padding:8px 12px; border-radius:999px; background: var(--glass-strong); border:1px solid var(--stroke); backdrop-filter: blur(10px); font-size:14px; color:#0b3a47; box-shadow: inset 0 1px 0 rgba(255,255,255,.6); transition: transform .18s ease, filter .18s ease, opacity .18s ease; will-change: transform, filter}  
+
+  .cta{display:flex; gap:12px; margin-top:22px; flex-wrap:wrap}
+  .btn{appearance:none; border:none; cursor:pointer; font-weight:800; padding:18px 26px; border-radius:18px; font-size:18px; transition: transform .15s ease, box-shadow .2s ease, opacity .2s ease; box-shadow: var(--shadow); position:relative; overflow:hidden; text-decoration:none; display:inline-flex; align-items:center; gap:10px; justify-content:center} 
+  .btn-primary{color:#fff; background: linear-gradient(135deg, var(--brand), var(--brand-2)); text-decoration:none; text-shadow:0 0 8px rgba(255,255,255,.55)}
+  .btn-ghost{background: linear-gradient(#ffffff,#ffffff) padding-box, linear-gradient(135deg, var(--brand), var(--brand-2)) border-box; border:2px solid transparent; color:#0f172a; text-decoration:none}  
+  .btn:hover{transform: translateY(-2px); text-decoration:none} 
+
+  .grid{display:grid; gap:18px; grid-template-columns: 1fr; margin-top:22px}
+  @media (min-width: 900px){ .grid{grid-template-columns: repeat(12,1fr);} }
+
+  .card{
+    grid-column: span 12;
+    background: var(--glass);
+    border:1px solid var(--stroke);
+    border-radius: var(--radius);
+    backdrop-filter: blur(10px);
+    box-shadow: var(--shadow);
+    padding: clamp(18px, 2vw, 26px);
+    transition: transform .2s ease, filter .25s ease, box-shadow .3s ease, background .3s ease;
+    will-change: transform, filter;
+  }
+  .card:hover{transform: translateY(-3px); box-shadow: 0 14px 40px rgba(20,20,60,0.12), 0 3px 14px rgba(20,20,60,0.06)}
+  .card h3{margin:0 0 10px; font-size: clamp(18px,2.2vw,22px)}
+  .card p{margin:0; color:var(--muted)}
+  .twocol{display:grid; gap:16px}
+  @media (min-width: 860px){ .twocol{grid-template-columns: 1fr 1fr;} }
+
+  .list{margin:10px 0 0; padding:0 0 0 18px}
+  .list li{margin:6px 0}
+
+  /* таблица */
+  .table-wrap{overflow:auto; border-radius:14px; border:1px solid var(--stroke); background: rgba(255,255,255,0.66); box-shadow: var(--shadow)}
+  table{width:100%; border-collapse: separate; border-spacing:0; font-size:15px; min-width:680px}
+  th, td{padding:12px 14px; text-align:left}
+  thead th{position:sticky; top:0; background:rgba(255,255,255,0.8); backdrop-filter: blur(6px); font-weight:700}
+  tbody tr:nth-child(odd){background: rgba(255,255,255,0.45)}
+  tbody tr:hover{background: rgba(255,255,255,0.65)}
+  tfoot td{font-weight:800}
+
+  .muted{color:var(--muted)}
+  .tagline{color:#0b3a47; font-weight:600}
+
+  /* плавное появление секций */
+  .reveal{opacity:0; transform: translateY(12px); transition: opacity .6s ease, transform .6s ease}
+  .reveal.in{opacity:1; transform:none}
+
+  footer{margin-top:28px; text-align:center; color:var(--muted)}
+
+  /* печать */
+  @media print{ .btn, .cta{display:none} body{background:#fff} .card{box-shadow:none; background:#fff} }
+
+  /* эффекты для рамки и анимаций */
+  @keyframes spin{to{transform:rotate(1turn)}}
+  @property --ang { syntax: '<angle>'; initial-value: 0turn; inherits: false; }
+  @keyframes spinAng { to { --ang: 1turn; } }
+  /* градиентная обводка для блока SKU */
+  .sku-glow{ border:2px solid transparent; border-radius: var(--radius);
+    background: linear-gradient(120deg, rgba(255,255,255,0.72), rgba(255,255,255,0.55)) padding-box,
+                conic-gradient(from var(--ang), var(--glow1) 0%, var(--glow2) 35%, var(--glow3) 70%, var(--glow1) 100%) border-box;
+    animation: spinAng 10s linear infinite; }
+  /* разделители строк и столбцов в таблице */
+  .table-wrap th, .table-wrap td{ border-bottom:1px solid rgba(15,23,42,.08) }
+  .table-wrap th + th, .table-wrap td + td{ border-left:1px solid rgba(15,23,42,.06) }
+  .table-wrap tbody tr:last-child td{ border-bottom:none }
+  /* мини‑окно Итого */
+  .total-box{display:flex; align-items:center; gap:12px; background: var(--glass); border:1px solid var(--stroke); border-radius: var(--radius); box-shadow: var(--shadow); padding:16px}
+  .total-label{color:var(--muted); font-weight:700}
+  .total-value{font-weight:800; font-size: clamp(20px,3vw,28px)}
+  /* анимация цены в CTA */
+  .btn-primary .price-anim{ font-variant-numeric: tabular-nums; transition: color .6s ease, text-decoration-color .6s ease, text-shadow .6s ease; }
+  .btn-primary .price-anim.old{ color: rgba(185,28,28,.45); text-shadow:none; text-decoration: line-through; text-decoration-thickness:2px; text-decoration-color: rgba(185,28,28,.45); }
+  /* пульсация финальной цены в CTA */
+  .btn-primary .price-anim.pulse{ animation: pricePulse 3s ease-in-out infinite; display:inline-block; transform-origin:center; }
+  @keyframes pricePulse{
+    0%{ transform:scale(1); text-shadow:0 0 6px rgba(255,255,255,.25) }
+    50%{ transform:scale(1.06); text-shadow:0 0 14px rgba(255,255,255,.40) }
+    100%{ transform:scale(1); text-shadow:0 0 6px rgba(255,255,255,.25) }
+  }
+  /* групповые hover‑эффекты */
+  @media (hover:hover){
+    /* чипсы в hero: навели на одну — она увеличивается, остальные легонько блюрятся */
+    .chips:hover .chip{ filter: blur(1.6px) saturate(.95); opacity:.8; transform: scale(.96); }
+    .chips:hover .chip:hover{ filter:none; opacity:1; transform: scale(1.08); z-index:2; }
+
+    /* карточки разделов: навели — эта чуть крупнее, остальные слегка размываются */
+    .grid:hover .card{ filter: blur(1.2px) saturate(.98); opacity:.92; transform:none; }
+    .grid:hover .card:hover{ filter:none; opacity:1; transform: scale(1.01); position:relative; z-index:2; }
+  }
+</style>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="brandbar">
+      <div class="logo" aria-hidden="true">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABAAAAAQACAMAAABIw9uxAAADAFBMVEWqHiH+//6rHyKpHSDGPkDKQkTIQELEPD7MREbDOz2sIC..." alt="ЮНИ.ai"/>
+      </div>
+      <div>
+        <div class="name">ЮНИ.ai</div>
+        <div class="tag">ИИ-системы японского качества</div>
+      </div>
+    </div>
+
+    <section class="hero reveal">
+      <h1>Коммерческое предложение</h1>
+      <p>Разработка сайта‑каталога с корзиной и заявкой менеджеру для производителя лакокрасочной продукции.</p>
+      <div class="chips" aria-label="Ключевые элементы">
+        <span class="chip">каталог с фильтрами</span>
+        <span class="chip">сравнение товаров</span>
+        <span class="chip">корзина → заявка менеджеру</span>
+        <span class="chip">адаптивный дизайн</span>
+        <span class="chip">SEO‑база</span>
+      </div>
+      <div class="cta">
+        <a class="btn btn-primary" href="#contact"><span class="price-anim" aria-live="polite">49 990 ₽</span></a>
+        <a class="btn btn-ghost" href="#contact">Подтвердить старт</a>
+      </div>
+    </section>
+
+    <div class="grid" id="scope">
+      <div class="card reveal" style="grid-column: span 12">
+        <h3>Состав разделов (7–10)</h3>
+        <div class="twocol">
+          <ul class="list">
+            <li>Главная</li>
+            <li>Каталог продукции с фильтрами</li>
+            <li>Карточка товара</li>
+            <li>Сравнение товаров</li>
+            <li>Корзина и заявка менеджеру</li>
+          </ul>
+          <ul class="list">
+            <li>О компании и производство</li>
+            <li>Сертификаты и качество</li>
+            <li>Доставка и FAQ</li>
+            <li>Контакты и карта</li>
+            <li class="muted">Опционально: блог, партнёрам, медиа</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card reveal" style="grid-column: span 12">
+        <h3>Что входит</h3>
+        <div class="twocol">
+          <ul class="list">
+            <li>Полная визуальная концепция и UI всех страниц</li>
+            <li>Промо‑тексты, микро‑копирайтинг, иконки, инфографика</li>
+            <li>Адаптивная вёрстка, единая стилистика</li>
+            <li>Каталог, фильтры, сравнение, корзина, заявка менеджеру</li>
+          </ul>
+          <ul class="list">
+            <li>Базовая SEO‑подготовка (мета, ЧПУ, sitemap)</li>
+            <li>Развёртывание кода на инфраструктуре заказчика</li>
+            <li>Гайд по администрированию</li>
+            <li class="muted">Интеграции с CRM/1С как доп. работы</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card reveal sku-glow" style="grid-column: span 12">
+        <h3>Пакет по дизайн‑упаковке SKU — 9 990 ₽</h3>
+        <p>Единый шаблон карточки для всех SKU: сетка характеристик, пиктограммы, рекомендации по фото.</p>
+      </div>
+
+      <div class="card reveal" style="grid-column: span 12">
+        <h3>Работы отдела разработки — декомпозиция 40 нормо‑часов</h3>
+        <div class="table-wrap" role="region" aria-label="Таблица работ">
+          <table>
+            <thead>
+              <tr>
+                <th>Этап</th>
+                <th>Состав работ</th>
+                <th>Нормо‑часы</th>
+                <th>Результат</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1. Брифинг и карта разделов</td>
+                <td>созвон, фиксация требований, карта контента</td>
+                <td>3</td>
+                <td>утверждённый скоп и дерево страниц</td>
+              </tr>
+              <tr>
+                <td>2. Прототипы</td>
+                <td>wireframe 7–10 страниц, сценарии переходов</td>
+                <td>6</td>
+                <td>кликабельный прототип</td>
+              </tr>
+              <tr>
+                <td>3. Дизайн</td>
+                <td>UI‑макеты экранов и состояний</td>
+                <td>8</td>
+                <td>финальный дизайн‑комплект</td>
+              </tr>
+              <tr>
+                <td>4. Вёрстка</td>
+                <td>адаптивные компоненты, сетка, типографика</td>
+                <td>8</td>
+                <td>валидная вёрстка</td>
+              </tr>
+              <tr>
+                <td>5. Логика каталога</td>
+                <td>фильтры, сравнение, корзина, заявка</td>
+                <td>9</td>
+                <td>рабочие пользовательские сценарии</td>
+              </tr>
+              <tr>
+                <td>6. Контент и SEO‑база</td>
+                <td>внедрение текстов, мета, Open Graph</td>
+                <td>3</td>
+                <td>заполненные страницы</td>
+              </tr>
+              <tr>
+                <td>7. Финальные тесты</td>
+                <td>чек‑листы, регресс, фиксы</td>
+                <td>2</td>
+                <td>стабильная сборка</td>
+              </tr>
+              <tr>
+                <td>8. Развёртывание</td>
+                <td>на серверах заказчика, краткий гайд</td>
+                <td>1</td>
+                <td>прод‑сборка</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="muted" style="margin-top:10px">Таблица отражает структуру работ.</p>
+        <div class="cta total-cta">
+          <a class="btn btn-ghost" href="#scope-total">ИТОГО</a>
+          <a class="btn btn-primary" href="#scope-total"><span class="nh-num" aria-live="polite">0</span>&nbsp;нормо‑часов</a>
+        </div>
+      </div>
+
+      <div class="card reveal" style="grid-column: span 12">
+        <h3>Сроки и условия</h3>
+        <ul class="list">
+          <li><strong>Срок разработки:</strong> до 20 рабочих дней при своевременной обратной связи</li>
+          <li><strong>Тесты и ожидание правок</strong> идут отдельно от этих 20 дней</li>
+          <li><strong>Оплата:</strong> по умолчанию 50/50 (возможен другой порядок по согласованию)</li>
+          <li><strong>Действие КП:</strong> 14 календарных дней</li>
+        </ul>
+      </div>
+
+      <div class="card reveal" style="grid-column: span 12">
+        <h3>Гарантии и сопровождение</h3>
+        <ul class="list">
+          <li><strong>Гарантия 5 лет</strong> на наш программный код (исправление багов и недочётов)</li>
+          <li><strong>Техобслуживание</strong> без ограничения по сроку: мониторинг доступности, базовые обновления</li>
+          <li><strong>5 правок/год бесплатно</strong> (точечные изменения без редизайна и новых фич)</li>
+        </ul>
+      </div>
+
+      <div class="card reveal" style="grid-column: span 12">
+        <h3>Требования к старту</h3>
+        <div class="twocol">
+          <ul class="list">
+            <li>брендбук и примеры носителей (если есть)</li>
+            <li>перечень SKU с атрибутами, прайсом и фото</li>
+            <li>сертификаты, регламенты доставки</li>
+          </ul>
+          <ul class="list">
+            <li>домен и доступы к хостингу/серверу</li>
+            <li>почтовый ящик для заявок менеджеру</li>
+            <li class="muted">интеграции/импорт из 1С обсуждаем дополнительно</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card reveal" style="grid-column: span 12">
+        <h3>Технические заметки</h3>
+        <p>Стек подбираем под инфраструктуру заказчика. Для каталога без онлайн‑оплат подходят современные фреймворки уровня Next.js/Nuxt или классические CMS. Интеграции с CRM и импорт каталога из Excel/1C делаем отдельно.</p>
+      </div>
+
+      <div class="card reveal" id="contact" style="grid-column: span 12">
+        <h3>Исполнитель</h3>
+        <p><strong>ООО «Бэнифит»</strong> — бренд <strong>ЮНИ.ai</strong>.</p>
+        <ul class="list">
+          <li>ИНН 7300031274, КПП 730001001, ОГРН 1247300003257</li>
+          <li>Юридический адрес: 432029, Россия, Ульяновская обл., г. Ульяновск, ул. Жигулевская, д. 17, оф. кв. 4</li>
+          <li>Бренд: ЮНИ.ai — ИИ-системы японского качества</li>
+        </ul>
+        <div class="cta">
+          <a class="btn btn-primary" id="tg-link" href="https://t.me/uni_consultant" target="_blank" rel="noopener noreferrer">Написать нам в Telegram</a>
+        </div>
+      </div>
+    </div>
+
+    <footer class="reveal">Сделано командой ЮНИ.ai</footer>
+  </div>
+
+<script>
+  // Плавное появление карточек + простые проверки
+  document.addEventListener('DOMContentLoaded', () => {
+    const obs = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('in'); });
+    }, {threshold: 0.08});
+    document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+    // Кнопка Telegram: пробуем открыть приложение через deeplink, затем fallback на веб-ссылку
+    const tgBtn = document.getElementById('tg-link');
+    if (tgBtn) {
+      tgBtn.addEventListener('click', (e) => {
+        // На мобильных предпочитаем глубокую ссылку
+        const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+        if (isMobile) {
+          e.preventDefault();
+          const deeplink = 'tg://resolve?domain=uni_consultant';
+          // Попытка открыть Telegram
+          window.location.href = deeplink;
+          // Через 500 мс — безопасный откат на t.me (если приложение не открылось)
+          setTimeout(() => {
+            window.open('https://t.me/uni_consultant', '_blank', 'noopener');
+          }, 500);
+        }
+      });
+    }
+
+    // Неблокирующие тесты (в консоль)
+    console.assert(document.querySelector('.hero'), 'hero должен существовать');
+    console.assert(!document.querySelector('.price'), 'блок с внешней ценой удалён');
+    // Счётчик 0→40 в кнопке под таблицей (старт при прокрутке, очень медленно)
+    const totalCta = document.querySelector('.total-cta');
+    const nh = totalCta ? totalCta.querySelector('.nh-num') : null;
+    if (nh && !nh.dataset.animated) {
+      const startCounter = () => {
+        nh.dataset.animated = '1';
+        const duration = 12000; // 12s — очень медленно
+        const from = 0, to = 40;
+        const t0 = performance.now();
+        const step = (now) => {
+          const t = Math.min(1, (now - t0) / duration);
+          const eased = t < .5 ? 2*t*t : 1 - Math.pow(-2*t + 2, 2)/2; // easeInOutQuad
+          const v = Math.round(from + (to - from) * eased);
+          nh.textContent = String(v);
+          if (t < 1) requestAnimationFrame(step);
+        };
+        nh.textContent = '0';
+        requestAnimationFrame(step);
+        setTimeout(()=>{ console.assert(nh.textContent === '40', 'Итого должно досчитаться до 40 (медленно)'); }, duration + 500);
+      };
+
+      if ('IntersectionObserver' in window && totalCta) {
+        const io = new IntersectionObserver((entries, obs) => {
+          for (const e of entries) {
+            if (e.isIntersecting) { startCounter(); obs.disconnect(); break; }
+          }
+        }, { threshold: 0.35 });
+        io.observe(totalCta);
+      } else {
+        startCounter();
+      }
+    }
+  });
+</script>
+<script>
+// Анимация цены в CTA: 0 → 89 990 (медленно), затем 89 990 тускло‑красным и зачёркнуто → очень плавно до 49 990
+(function(){
+  const span = document.querySelector('.hero .btn-primary .price-anim');
+  if(!span || span.dataset.animated) return;
+  span.dataset.animated = '1';
+  const fmt = new Intl.NumberFormat('ru-RU');
+  const setVal = v => { span.textContent = fmt.format(Math.round(v)) + ' ₽'; };
+  const animate = (from, to, ms, easing, tick, done) => {
+    const t0 = performance.now();
+    const step = (now)=>{
+      const t = Math.min(1, (now - t0)/ms);
+      const e = easing? easing(t) : t;
+      const val = from + (to - from)*e;
+      tick(val);
+      if(t<1) requestAnimationFrame(step); else if(done) done();
+    };
+    requestAnimationFrame(step);
+  };
+  const easeOut = t => 1 - Math.pow(1 - t, 3);
+  const easeInOut = t => t < .5 ? 2*t*t : 1 - Math.pow(-2*t + 2, 2)/2;
+
+  // Фаза 1: подсчёт до 89 990 (3600 мс)
+  animate(0, 89990, 3600, easeOut, setVal, () => {
+    setVal(89990);
+    setTimeout(() => {
+      // Фаза 2: тускло‑красная зачёркнутая, пауза 500 мс, затем медленное снижение 4200 мс
+      span.classList.add('old');
+      setTimeout(()=>{
+        animate(89990, 49990, 4200, easeInOut, setVal, () => {
+          span.classList.remove('old');
+          setVal(49990);
+          span.classList.add('pulse');
+        });
+      }, 500);
+    }, 600);
+  });
+
+  // Тесты (не блокируют UI)
+  // 1) На ~3.7с после старта должна быть показана 89 990
+  setTimeout(()=>{ console.assert(span.textContent.includes('89 990'), 'Должно дойти до 89 990'); }, 3700);
+  // 2) К финалу должна быть 49 990 и активна пульсация
+  setTimeout(()=>{ console.assert(span.textContent.includes('49 990'), 'Финальная стоимость должна быть 49 990'); }, 9500);
+  setTimeout(()=>{ console.assert(span.classList.contains('pulse'), 'Пульсация должна запуститься'); }, 9600);
+})();
+</script>
+</body>
+</html>
